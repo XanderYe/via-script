@@ -15,7 +15,11 @@
   try {
     window[key] = true;
     document.addEventListener("readystatechange", () => {
-
+      var downloadBtn = document.getElementsByClassName("right-text--GeDvB").item(2);
+      downloadBtn.innerHTML = "下载视频";
+      downloadBtn.addEventListener("click", () => {
+        console.log("下载视频");
+      })
     }, {'passive': true, 'once': true});
   } catch (err) {
     console.log('抖音视频下载：', err);
