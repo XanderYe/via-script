@@ -18,7 +18,7 @@
       init();
 
       function init() {
-        if (document.querySelectorAll("div[class^=img-container]").length > 0) {
+        if (document.querySelectorAll("div[class^=avatar-container]").length > 0) {
           inject();
         } else {
           setTimeout(() => {
@@ -28,23 +28,20 @@
       }
 
       function inject() {
-        let oldDivDom = document.querySelectorAll("div[class^=img-container]").item(8);
-        let divStyle = oldDivDom.style.cssText;
-        oldDivDom.remove();
+        let oldImgDom = document.getElementsByClassName("d-icon").item(1);
+        let imgSrc = oldImgDom.src;
+        oldImgDom.remove();
         document.querySelectorAll("p[class^=right-text]").item(2).remove();
-        var divDom = document.createElement("div");
-        divDom.style.cssText = divStyle;
-        divDom.style.setProperty("width", "1.06667rem");
-        divDom.style.setProperty("height", "1.06667rem");
-        divDom.style.setProperty("background-position", "center center");
-        divDom.style.setProperty("background-repeat", "no-repeat");
+        var imageDom = document.createElement("img");
+        imageDom.src = imgSrc;
+        imageDom.className = "d-icon";
         let pDom = document.createElement("p");
         pDom.innerText = "下载视频";
-        pDom.style.cssText = "font-weight: 500;font-size: 0.34667rem;line-height: 0.48rem;text-shadow: 0 1px 1px rgba(22,24,35,0.2);margin-bottom: 0.42667rem;";
+        pDom.style.cssText = "font-weight: 500;font-size: 0.26rem;line-height: 0.36rem;text-shadow: 0 1px 1px rgba(22,24,35,.2);margin-bottom: 0.32rem;";
         var parent = document.querySelectorAll("div[class^=right]").item(0)
-        parent.append(divDom);
+        parent.append(imageDom);
         parent.append(pDom);
-        divDom.addEventListener("click", () => {
+        imageDom.addEventListener("click", () => {
           console.log("下载视频");
           download();
         })
