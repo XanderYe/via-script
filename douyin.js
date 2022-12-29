@@ -52,7 +52,9 @@
       }
 
       function download() {
-        let filename = document.querySelector("p[class^=desc]").innerHTML + ".mp4";
+        let desc = document.querySelector(".multi-line_text").children[0].innerHTML;
+        desc = desc.replaceAll(/\s/g, "");
+        let filename = desc + ".mp4";
         let downUrl = confirm("是否下载去水印视频？") ? getVideoUrlWithoutWatermark() : getVideoUrl();
         let a = document.createElement("a");
         a.download = filename;
