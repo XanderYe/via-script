@@ -1,12 +1,13 @@
-/*
- * @name: 抖音视频下载
- * @Author: XanderYe
- * @version: 0.1
- * @description: 添加抖音下载视频按钮，支持去水印下载，点击下载视频后跳转到源视频地址，via可以右下角保存视频。
- * @include: www.iesdouyin.com
- * @createTime: 2021-06-28 18:00
- * @updateTime: 2021-06-28 18:00
- */
+// ==UserScript==
+// @name         抖音视频下载
+// @namespace    https://viayoo.com/
+// @version      0.3
+// @description  添加抖音下载视频按钮，支持去水印下载，点击下载视频后跳转到源视频地址，via可以右下角保存视频。
+// @author       XanderYe
+// @run-at       document-end
+// @match        http*://www.iesdouyin.com/*
+// @grant        none
+// ==/UserScript==
 (function () {
   const key = encodeURIComponent('抖音视频下载:执行判断');
   if (window[key]) {
@@ -52,8 +53,12 @@
       }
 
       function download() {
-        let desc = document.querySelector(".multi-line_text").children[0].innerHTML;
-        desc = desc.replaceAll(/\s/g, "");
+        let desc = "download";
+        try {
+          desc = document.querySelector(".multi-line_text").children[0].innerHTML;
+          desc = desc.replaceAll(/\s/g, "");
+        } catch (e) {
+        }
         let filename = desc + ".mp4";
         let downUrl = confirm("是否下载去水印视频？") ? getVideoUrlWithoutWatermark() : getVideoUrl();
         let a = document.createElement("a");
